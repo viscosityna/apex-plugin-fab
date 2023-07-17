@@ -8,7 +8,7 @@
 	export let width = '50px'
 	export let fabcolor = '#000000'
 	export let background = '#FFFFFF'
-  export let contextbg = '#FFFFFF'
+  // export let contextbg = '#FFFFFF'
 	export let position = 'bottom right'
 	export let borderradius = '100%'
 	export let opened = false
@@ -114,10 +114,15 @@
     color: var(--fabcolor, #344955);
     opacity: 0.8;
   }
+
   .vis-fab-wrapper .vis-fab-context a:hover {
     transition: 0.2s;
     opacity: 1;
     color: darken(#344955, 2%);
+  }
+
+  .vis-fab-wrapper .vis-fab-context .t-Button {
+    --a-button-padding-x: 0 !important;
   }
   
   .vis-fab-wrapper input {

@@ -382,7 +382,6 @@ function instance($$self, $$props, $$invalidate) {
 	let { width = '50px' } = $$props;
 	let { fabcolor = '#000000' } = $$props;
 	let { background = '#FFFFFF' } = $$props;
-	let { contextbg = '#FFFFFF' } = $$props;
 	let { position = 'bottom right' } = $$props;
 	let { borderradius = '100%' } = $$props;
 	let { opened = false } = $$props;
@@ -409,8 +408,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ('width' in $$props) $$invalidate(1, width = $$props.width);
 		if ('fabcolor' in $$props) $$invalidate(2, fabcolor = $$props.fabcolor);
 		if ('background' in $$props) $$invalidate(3, background = $$props.background);
-		if ('contextbg' in $$props) $$invalidate(8, contextbg = $$props.contextbg);
-		if ('position' in $$props) $$invalidate(9, position = $$props.position);
+		if ('position' in $$props) $$invalidate(8, position = $$props.position);
 		if ('borderradius' in $$props) $$invalidate(4, borderradius = $$props.borderradius);
 		if ('opened' in $$props) $$invalidate(7, opened = $$props.opened);
 	};
@@ -424,7 +422,6 @@ function instance($$self, $$props, $$invalidate) {
 		positiony,
 		positionx,
 		opened,
-		contextbg,
 		position,
 		open,
 		close,
@@ -452,13 +449,12 @@ class FloatingActionButton extends SvelteElement {
 				width: 1,
 				fabcolor: 2,
 				background: 3,
-				contextbg: 8,
-				position: 9,
+				position: 8,
 				borderradius: 4,
 				opened: 7,
-				open: 10,
-				close: 11,
-				toggle: 12
+				open: 9,
+				close: 10,
+				toggle: 11
 			},
 			null
 		);
@@ -481,7 +477,6 @@ class FloatingActionButton extends SvelteElement {
 			"width",
 			"fabcolor",
 			"background",
-			"contextbg",
 			"position",
 			"borderradius",
 			"opened",
@@ -527,17 +522,8 @@ class FloatingActionButton extends SvelteElement {
 		flush();
 	}
 
-	get contextbg() {
-		return this.$$.ctx[8];
-	}
-
-	set contextbg(contextbg) {
-		this.$$set({ contextbg });
-		flush();
-	}
-
 	get position() {
-		return this.$$.ctx[9];
+		return this.$$.ctx[8];
 	}
 
 	set position(position) {
@@ -564,15 +550,15 @@ class FloatingActionButton extends SvelteElement {
 	}
 
 	get open() {
-		return this.$$.ctx[10];
+		return this.$$.ctx[9];
 	}
 
 	get close() {
-		return this.$$.ctx[11];
+		return this.$$.ctx[10];
 	}
 
 	get toggle() {
-		return this.$$.ctx[12];
+		return this.$$.ctx[11];
 	}
 }
 
