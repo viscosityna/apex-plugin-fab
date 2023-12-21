@@ -2,20 +2,31 @@
 
 <script>
   import { get_current_component } from 'svelte/internal'
+  import { clickOutside } from './clickOutside'
   const component = get_current_component()
 
 	export let height = '50px'
 	export let width = '50px'
 	export let fabcolor = '#000000'
 	export let background = '#FFFFFF'
-  // export let contextbg = '#FFFFFF'
+  export let contextbg = '#FFFFFF'
+  export let contexth = '150px'
 	export let position = 'bottom right'
 	export let borderradius = '100%'
-	export let opened = false
+	export let ctxradius = '32px'
+  export let marginbottom = '16px'
+  export let marginright = '16px'
 
 	const positiony = position.split(' ')[0] === 'top' ? 'initial': '0'
 	const positionx = position.split(' ')[1] === 'left' ? 'initial': '0'
 
+  function handleClickOutside(event) {
+		if (event.target.checked) {
+      event.target.checked = false;
+    }
+	}
+  
+  /*
 	export function open () {
 		opened = true
     component?.dispatchEvent(new CustomEvent('open', { detail: null, composed: true }))
@@ -30,12 +41,13 @@
 		opened ? close() : open()
     component?.dispatchEvent(new CustomEvent('toggle', { detail: null, composed: true }))
 	}
+  */
 </script>
 
 <main>
 	<div class="vis-fab-wrapper"
-  style="--height: {height}; --width: {width}; --fabcolor: {fabcolor}; --background: {background}; --borderradius: {borderradius}; --positiony: {positiony}; --positionx: {positionx}">
-    <input type="checkbox" />
+  style="--height: {height}; --width: {width}; --fabcolor: {fabcolor}; --background: {background}; --contextbg: {contextbg}; --contexth: {contexth}; --borderradius: {borderradius}; --positiony: {positiony}; --positionx: {positionx}; --ctxradius: {ctxradius}; --marginbottom: {marginbottom}; --marginright: {marginright}">
+    <input type="checkbox" use:clickOutside on:click_outside={handleClickOutside} />
     <div class="vis-fab"></div>
     <div class="vis-fab-context">
       <slot></slot>
@@ -52,7 +64,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 16px;
+    margin-bottom: var(--marginbottom, 16px);
+    margin-right: var(--marginright, 16px);
     position: fixed;
     bottom: var(--positiony);
     right: var(--positionx);
@@ -93,21 +106,23 @@
   }
   
   .vis-fab-wrapper .vis-fab-context {
-    width: 32px;
-    height: 150px;
-    border-radius: 64px;
+    width: 200px;
+    height: var(--contexth, 150px);
+    border-radius: var(--ctxradius, 0) var(--ctxradius, 0) 0 var(--ctxradius, 0);
     position: absolute;
-    background: #fff;
+    background: var(--contextbg, #FFFFFF);
     z-index: 2;
     padding: 0.5rem 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     opacity: 0;
-    top: -110px;
+    right: 0;
+    top: calc( 30px + (var(--contexth) * -1));
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    transition: opacity 0.2s ease-in, top 0.2s ease-in, width 0.1s ease-in;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in, top 0.2s ease-in, width 0.1s ease-in, visibility 0.2s linear;
   }
   
   .vis-fab-wrapper .vis-fab-context a {
@@ -140,11 +155,12 @@
   }
       
   .vis-fab-wrapper input:checked ~ .vis-fab-context {
-    width: 32px;
-    height: 150px;
     animation: vis-fac-animation 0.4s ease-out forwards 0.1s;
-    top: -180px;
+    height: var(--contexth, 150px);
     opacity: 1;
+    top: calc( -30px + (var(--contexth) * -1));
+    visibility: visible;
+    width: 200px;
   }
 
   @keyframes vis-fab-animation {
