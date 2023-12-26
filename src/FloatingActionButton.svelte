@@ -10,7 +10,7 @@
 	export let fabcolor = '#000000'
 	export let background = '#FFFFFF'
   export let contextbg = '#FFFFFF'
-  export let contexth = '150px'
+  export let contexth = 'auto'
   export let contextw = 'auto'
 	export let position = 'bottom right'
 	export let borderradius = '100%'
@@ -109,7 +109,7 @@
   .vis-fab-wrapper .vis-fab-context {
     width: var(--contextw, auto);
     min-width: 60px;
-    height: var(--contexth, 150px);
+    height: var(--contexth, auto);
     border-radius: var(--ctxradius, 0) var(--ctxradius, 0) 0 var(--ctxradius, 0);
     position: absolute;
     background: var(--contextbg, #FFFFFF);
@@ -118,13 +118,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     opacity: 0;
     right: 0;
-    top: calc( 30px + (var(--contexth) * -1));
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     visibility: hidden;
-    transition: opacity 0.2s ease-in, top 0.2s ease-in, width 0.1s ease-in, visibility 0.2s linear;
+    transition: opacity 0.2s ease-in, bottom 0.2s ease-in, width 0.1s ease-in, visibility 0.2s linear;
   }
   
   .vis-fab-wrapper .vis-fab-context a {
@@ -158,9 +158,9 @@
       
   .vis-fab-wrapper input:checked ~ .vis-fab-context {
     animation: vis-fac-animation 0.4s ease-out forwards 0.1s;
-    height: var(--contexth, 150px);
+    height: var(--contexth, auto);
     opacity: 1;
-    top: calc( -30px + (var(--contexth) * -1));
+    bottom: 110%;
     visibility: visible;
     width: var(--contextw, auto);
   }
