@@ -11,6 +11,7 @@
 	export let background = '#FFFFFF'
   export let contextbg = '#FFFFFF'
   export let contexth = '150px'
+  export let contextw = 'auto'
 	export let position = 'bottom right'
 	export let borderradius = '100%'
 	export let ctxradius = '32px'
@@ -46,7 +47,7 @@
 
 <main>
 	<div class="vis-fab-wrapper"
-  style="--height: {height}; --width: {width}; --fabcolor: {fabcolor}; --background: {background}; --contextbg: {contextbg}; --contexth: {contexth}; --borderradius: {borderradius}; --positiony: {positiony}; --positionx: {positionx}; --ctxradius: {ctxradius}; --marginbottom: {marginbottom}; --marginright: {marginright}">
+  style="--height: {height}; --width: {width}; --fabcolor: {fabcolor}; --background: {background}; --contextbg: {contextbg}; --contexth: {contexth}; --contextw: {contextw}; --borderradius: {borderradius}; --positiony: {positiony}; --positionx: {positionx}; --ctxradius: {ctxradius}; --marginbottom: {marginbottom}; --marginright: {marginright}">
     <input type="checkbox" use:clickOutside on:click_outside={handleClickOutside} />
     <div class="vis-fab"></div>
     <div class="vis-fab-context">
@@ -106,7 +107,8 @@
   }
   
   .vis-fab-wrapper .vis-fab-context {
-    width: 200px;
+    width: var(--contextw, auto);
+    min-width: 60px;
     height: var(--contexth, 150px);
     border-radius: var(--ctxradius, 0) var(--ctxradius, 0) 0 var(--ctxradius, 0);
     position: absolute;
@@ -160,7 +162,7 @@
     opacity: 1;
     top: calc( -30px + (var(--contexth) * -1));
     visibility: visible;
-    width: 200px;
+    width: var(--contextw, auto);
   }
 
   @keyframes vis-fab-animation {
